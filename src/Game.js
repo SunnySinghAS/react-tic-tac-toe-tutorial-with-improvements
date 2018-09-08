@@ -32,6 +32,7 @@ class Game extends React.Component {
       }],
       stepNumber: 0,
       xIsNext: true,
+      isToggleOn: false,
     };
   }
 
@@ -61,6 +62,13 @@ class Game extends React.Component {
     this.setState({
       stepNumber: step,
       xIsNext: (step % 2) === 0,
+    });
+  }
+
+  handleToggle() {
+    // const prevToggle = this.state.isToggleOn;
+    this.setState({
+      isToggleOn: !this.state.isToggleOn,
     });
   }
 
@@ -94,7 +102,10 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol>{moves}</ol>
+          <button onClick={() => this.handleToggle()}>
+            {this.state.isToggleOn ? 'Moves in Ascending Order' : 'Moves in Descending Order'}
+          </button>
+          {this.state.isToggleOn ? <ol>{moves}</ol> : <ol reversed>{moves.reverse()}</ol>}
         </div>
       </div>
     );
